@@ -5,7 +5,7 @@
 #
 
 import pygame
-from src.logic.driver import Lifelight
+from src.logic import Lifelight
 
 pygame.init()
 

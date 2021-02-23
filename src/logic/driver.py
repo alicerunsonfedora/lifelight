@@ -5,6 +5,7 @@
 #
 
 from os import path
+from typing import Tuple
 from src.logic.player import Player
 import pygame
 from src.assets import Tilesheet, ColorPalette
@@ -13,13 +14,14 @@ from src.assets import Tilesheet, ColorPalette
 class Lifelight():
     """The main application class for the game."""
 
-    def __init__(self) -> None:
+    def __init__(self, window_size: Tuple[int, int] = (1280, 720), fps: int = 60) -> None:
         """Set up the game's canvas, colors, tilesheets, and event listeners."""
 
-        self.canvas = pygame.display.set_mode((1280, 720))
+        self.canvas = pygame.display.set_mode(window_size)
         pygame.display.set_caption("Lifelight")
 
         self.frame_limiter = pygame.time.Clock()
+        self.fps = fps
 
         self.palette = ColorPalette(path.join("assets", "adventure28.gpl"))
         self.palette.assign_color_name("DARK_BLACK", "091d21")
@@ -31,7 +33,7 @@ class Lifelight():
 
     def manage_game_events(self) -> bool:
         """Manage the primary game events such as quitting, player movement, etc."""
-        self.frame_limiter.tick(60)
+        self.frame_limiter.tick(self.fps)
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
