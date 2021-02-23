@@ -47,7 +47,7 @@ def parse_gpl_file(filepath: str) -> Dict[str, Tuple[int, int, int]]:
     """
     palette = {}
 
-    with open(filepath, 'r') as file_object:
+    with open(filepath, 'r', encoding="utf-8") as file_object:
         file_lines = [line for line in file_object.readlines()
                       if not line.startswith("#")]
 

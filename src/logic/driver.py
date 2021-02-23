@@ -8,7 +8,7 @@ from os import path
 from typing import Tuple
 from src.logic.player import Player
 import pygame
-from src.assets import Tilesheet, ColorPalette
+from src.assets import Tilesheet, ColorPalette, asset_path
 
 
 class Lifelight():
@@ -23,11 +23,11 @@ class Lifelight():
         self.frame_limiter = pygame.time.Clock()
         self.fps = fps
 
-        self.palette = ColorPalette(path.join("assets", "adventure28.gpl"))
+        self.palette = ColorPalette(asset_path("assets/adventure28.gpl"))
         self.palette.assign_color_name("DARK_BLACK", "091d21")
 
         self.ts_structures = Tilesheet(
-            path.join("assets", "tilesheets", "struct.png"), (48, 48), (12, 16))
+            asset_path("assets/tilesheets/struct.png"), (48, 48), (12, 16))
 
         self.player = Player((200, 200), 4)
 

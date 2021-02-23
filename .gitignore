@@ -11,4 +11,6 @@
 .idea/
 .vscode/
 
-
+# Distribution files
+build/
+dist/

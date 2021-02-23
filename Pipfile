@@ -3,6 +3,9 @@ url = "https://pypi.org/simple"
 verify_ssl = true
 name = "pypi"
 
+[scripts]
+build = "pyinstaller --windowed Lifelight.spec"
+
 [packages]
 pygame = "*"
 
@@ -11,4 +14,4 @@ autopep8 = "*"
 pyinstaller = "*"
 
 [requires]
-python_version = "3.8"
+python_version = "3.9"

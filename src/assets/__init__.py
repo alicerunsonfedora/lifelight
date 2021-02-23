@@ -7,3 +7,4 @@
 """This module handles gathering and manipulating game assets, whether it be images, sounds, or colors."""
 from .tilesheet import Tilesheet
 from .color import ColorPalette
+from .pyinst import *
