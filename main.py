@@ -4,7 +4,6 @@
 # file, You can obtain one at https://mozilla.org/MPL/2.0/.
 #
 
-import pygame
 from src.game import main
 
 if __name__ == "__main__":
