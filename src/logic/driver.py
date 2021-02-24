@@ -7,7 +7,7 @@
 from os import path
 from typing import Tuple
 from src.logic.player import Player
-from src.logic.levels import Level
+from src.data.levels import Level
 import pygame
 from src.assets import Tilesheet, ColorPalette, asset_path
 

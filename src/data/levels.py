@@ -3,7 +3,9 @@
 # License, v. 2.0. If a copy of the MPL was not distributed with this
 # file, You can obtain one at https://mozilla.org/MPL/2.0/.
 #
+
 from typing import List, Tuple, Dict
+from src.data.tileset_defs import parse_tiles
 
 
 class Level():
@@ -36,13 +38,17 @@ class Level():
             raise TypeError("Level dimensions is missing or corrupt.")
         self.dimensions = tuple([int(dim) for dim in dimensions[1:]])
 
-        if source.pop(0) != "BEGIN DEFINITIONS":
-            raise TypeError("Definition block is missing or corrupt.")
+        if self.tileset_name.startswith("#"):
+            self.tile_definitions = parse_tiles(
+                f"data/ts_defs/{self.tileset_name[1:]}.tsd")[1]
+        else:
+            if source.pop(0) != "BEGIN DEFINITIONS":
+                raise TypeError("Definition block is missing or corrupt.")
 
-        while (data := source.pop(0)) != "END DEFINITIONS":
-            properties = data.split("  ")
-            self.tile_definitions[properties[0]] = tuple(
-                [int(val) for val in properties[1:]])
+            while (data := source.pop(0)) != "END DEFINITIONS":
+                properties = data.split("  ")
+                self.tile_definitions[properties[0]] = tuple(
+                    [int(val) for val in properties[1:]])
 
         if source.pop(0) != "BEGIN LAYOUT":
             raise TypeError("Layout block is missing or corrupt.")
