@@ -31,7 +31,7 @@ class Level():
             raise TypeError("Tileset data is missing or corrupt.")
         self.tileset_name = tileset_name[1].lower().strip()
 
-        dimensions = source.pop(0).split("\t")
+        dimensions = source.pop(0).split("  ")
         if dimensions[0] != "SIZE":
             raise TypeError("Level dimensions is missing or corrupt.")
         self.dimensions = tuple([int(dim) for dim in dimensions[1:]])
@@ -40,7 +40,7 @@ class Level():
             raise TypeError("Definition block is missing or corrupt.")
 
         while (data := source.pop(0)) != "END DEFINITIONS":
-            properties = data.split("\t")
+            properties = data.split("  ")
             self.tile_definitions[properties[0]] = tuple(
                 [int(val) for val in properties[1:]])
 
