@@ -4,6 +4,7 @@ verify_ssl = true
 name = "pypi"
 
 [scripts]
+game = "python Lifelight.py"
 build = "pyinstaller --windowed Lifelight.spec"
 
 [packages]
