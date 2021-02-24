@@ -9,7 +9,23 @@ from src.data.tileset_defs import parse_tiles
 
 
 class Level():
+    """A class that includes data about a level from a level file.
+
+    Class Attributes:
+        src (str): The path to the file that generated this level.
+        tileset_name (str): The tileset being used in this level.
+        dimensions (tuple): A tuple containing the size of the level.
+        tile_definitions (dict): A dictionary with characters as keys and a position in the tileset as their values.
+            This dictionary defines what tile is used in place of an ASCII character in the level file.
+        tiles (list): A two-dimensional array containing the tileset positions to be drawn to the screen.
+    """
+
     def __init__(self, filepath):
+        """Creates a level from a file.
+
+        Arguments:
+            filepath(str): The path to the file to open and parse level data from.
+        """
         self.src = filepath
         self.tileset_name: str = ""
         self.dimensions: Tuple[int, int] = (0, 0)
