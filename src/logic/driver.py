@@ -18,7 +18,7 @@ class Lifelight():
     def __init__(self, window_size: Tuple[int, int] = (1280, 720), fps: int = 60) -> None:
         """Set up the game's canvas, colors, tilesheets, and event listeners."""
 
-        self.canvas = pygame.display.set_mode(window_size)
+        self.canvas = pygame.display.set_mode(window_size, pygame.RESIZABLE)
         pygame.display.set_caption("Lifelight")
 
         self.frame_limiter = pygame.time.Clock()
@@ -52,9 +52,20 @@ class Lifelight():
         # Fill the canvas with a black-like color.
         self.canvas.fill(self.palette.get_color("DARK_BLACK"))
 
-        # Set up the tile sequencers.
-        tx, ty = 16, 16  # TODO: Get these tiles centered!
-        width, height = self.ts_structures.tile_size
+        # Get the width and the height of the level, tiles, and the window.
+        l_width, l_height = self.level.dimensions
+        t_width, t_height = self.ts_structures.tile_size
+        c_width, c_height = pygame.display.get_window_size()
+
+        # Get the center of the screen.
+        center_x, center_y = c_width / 2, c_height / 2
+
+        # Determine the offsets at which to draw the first tile on the screen.
+        offset_x = center_x - (t_width * (l_width / 2))
+        offset_y = center_y - (t_height * (l_height / 2))
+
+        # Create a coordinate that will represent the tiles, starting with the first tile from the offset.
+        tile_x, tile_y = offset_x, offset_y
 
         # Iterate through all of the tilemap rows, filling the tilemap slowly.
         for row in self.level.tiles:
@@ -64,12 +75,12 @@ class Lifelight():
             for cx, cy in row:
                 if cx != -1 and cy != -1:
                     self.canvas.blit(
-                        self.ts_structures.get_tile(cx, cy), (tx, ty))
-                tx += width
+                        self.ts_structures.get_tile(cx, cy), (tile_x, tile_y))
+                tile_x += t_width
 
             # Move to the next row and reset the X position.
-            ty += height
-            tx = 16
+            tile_y += t_height
+            tile_x = offset_x
 
     def render(self) -> None:
         """Render the changes onto the screen."""
