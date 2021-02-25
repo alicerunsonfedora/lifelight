@@ -2,6 +2,8 @@
 
 A game about being a role model for others
 
+> :warning: As of right now, this repo just contains some "playground" code that can render a level from a tileset in Pygame, as well as do basic player movement with keys. I'm not sure if this project will be its own game or just the base for other projects.
+
 ## Build from source
 
 ### Requirements
